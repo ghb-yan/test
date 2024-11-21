@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Play the Memory Test game to enhance your memory skills with a fun and challenging experience.">
+<meta name="keywords" content="Memory Test, Memory Game, Brain Training, Online Memory Exercise">
+<title>Memory Test - Enhance Your Memory Skills</title>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        color: #333;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+    }
+    header {
+        background-color: #007BFF;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+    }
+    .container {
+        width: 80%;
+        max-width: 1200px;
+        margin: 20px auto;
+    }
+    h1, h2, h3 {
+        color: #007BFF;
+    }
+    p {
+        line-height: 1.6;
+    }
+    .section {
+        margin-bottom: 40px;
+    }
+    .game-container {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        height: 0;
+        overflow: hidden;
+    }
+    .game-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    footer {
+        background-color: #007BFF;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+</style>
+</head>
+<body>
+<header>
+    <h1>Memory Test - Improve Your Memory Skills</h1>
+</header>
+<main>
+    <div class="container">
+        <section class="section">
+            <h2>Welcome to the Memory Test Game!</h2>
+            <p>The Memory Test is an engaging and educational online game designed to challenge and improve your memory. With 20 levels of increasing difficulty, this game will test your ability to remember numbers quickly and accurately.</p>
+        </section>
+        <section class="section">
+            <h2>How to Play</h2>
+            <p>Each level presents a number for you to memorize within a 5-second time limit. Once the time is up, you will be prompted to enter the number you just saw. The numbers start from a single digit and increase in length as you progress through the levels.</p>
+        </section>
+        <section class="section">
+            <h2>Scoring System</h2>
+            <p>Your score is calculated based on the number of levels you complete correctly. Each level has a different point value, starting from 5 points for the first level and increasing by 5 points for each subsequent level (e.g., Level 1 = 5 points, Level 2 = 10 points, Level 20 = 100 points). The maximum possible score is 1050 points.</p>
+        </section>
+        <section class="section">
+            <h2>Levels and Progress</h2>
+            <p>The game consists of 20 levels. A progress bar at the top of the game screen shows your progress through the levels. Each completed level is marked with a green circle, while incorrect answers are marked with a red circle.</p>
+        </section>
+        <section class="section">
+            <h2>Gameplay Tips</h2>
+            <ul>
+                <li>Focus on the number presented and try to visualize it in your mind.</li>
+                <li>Practice regularly to improve your memory skills over time.</li>
+                <li>Stay calm and avoid rushing, as accuracy is more important than speed.</li>
+            </ul>
+        </section>
+        <section class="section">
+            <h2>Start the Game</h2>
+            <div class="game-container">
+                <iframe src="game.html" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </section>
+    </div>
+</main>
+<footer>
+    <p>&copy; 2024 MemoryTest.io. All rights reserved.</p>
+</footer>
+</body>
+</html>
