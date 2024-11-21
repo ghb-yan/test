@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>记忆力锻炼游戏</title>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+    }
+    .container {
+        text-align: center;
+        width: 80%;
+        max-width: 600px;
+    }
+    .progress-bar {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    .progress-bar div {
+        width: 30px;
+        height: 30px;
+        background-color: #ccc;
+        border-radius: 50%;
+    }
+    .green { background-color: green; }
+    .red { background-color: red; }
+    .number, .input, .result {
+        font-size: 2em;
+        margin: 20px 0;
+    }
+    .start, .submit {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+    .hidden {
+        display: none;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>记忆力锻炼游戏</h1>
+    <div class="progress-bar"></div>
+    <div id="rules" class="rules">
+        <p>游戏规则：每关显示一个数字，记住并在5秒后输入正确答案。</p>
+        <button class="start" onclick="startGame()">开始游戏</button>
+    </div>
+    <div id="game" class="hidden">
+        <div id="number" class="number"></div>
+        <input type="text" id="answer" class="input hidden" disabled>
+        <button id="submit" class="submit hidden" onclick="checkAnswer()">提交</button>
+        <div id="result" class="result hidden"></div>
+    </div>
+    <div id="end" class="hidden">
+        <h2>游戏结束！</h2>
+        <p>您的得分：<span id="finalScore"></span></p>
+        <p id="scoreText"></p>
+    </div>
+</div>
+
+<script>
+let currentLevel = 0;
+let score = 0;
+const levels = 20;
+const progressBar = document.querySelector('.progress-bar');
+const numberDisplay = document.getElementById('number');
+const answerInput = document.getElementById('answer');
+const submitButton = document.getElementById('submit');
+const resultDisplay = document.getElementById('result');
+const finalScoreDisplay = document.getElementById('finalScore');
+const scoreTextDisplay = document.getElementById('scoreText');
+
+function startGame() {
+    document.getElementById('rules').classList.add('hidden');
+    document.getElementById('game').classList.remove('hidden');
+    nextLevel();
+}
+
+function nextLevel() {
+    if (currentLevel < levels) {
+        currentLevel++;
+        const numLength = currentLevel;
+        const randomNum = Math.floor(Math.pow(10, numLength - 1) + Math.random() * 9 * Math.pow(10, numLength - 1));
+        numberDisplay.textContent = randomNum;
+        numberDisplay.style.display = 'block';
+        answerInput.classList.add('hidden');
+        submitButton.classList.add('hidden');
+        resultDisplay.classList.add('hidden');
+        answerInput.value = '';
+        setTimeout(showInput, 5000);
+        updateProgress();
+    } else {
+        endGame();
+    }
+}
+
+function showInput() {
+    numberDisplay.style.display = 'none';
+    answerInput.classList.remove('hidden');
+    submitButton.classList.remove('hidden');
+    answerInput.disabled = false;
+    answerInput.focus();
+}
+
+function checkAnswer() {
+    answerInput.disabled = true;
+    const correctAnswer = numberDisplay.textContent;
+    const userAnswer = answerInput.value.trim();
+    if (userAnswer === correctAnswer) {
+        score += 5 * currentLevel;
+        resultDisplay.textContent = '正确！';
+        resultDisplay.style.color = 'green';
+        updateProgress(true);
+    } else {
+        resultDisplay.textContent = '错误！';
+        resultDisplay.style.color = 'red';
+        updateProgress(false);
+    }
+    resultDisplay.classList.remove('hidden');
+    setTimeout(nextLevel, 2000);
+}
+
+function updateProgress(isCorrect) {
+    const progressItem = progressBar.children[currentLevel - 1];
+    if (isCorrect) {
+        progressItem.classList.add('green');
+    } else {
+        progressItem.classList.add('red');
+    }
+}
+
+function endGame() {
+    document.getElementById('game').classList.add('hidden');
+    document.getElementById('end').classList.remove('hidden');
+    finalScoreDisplay.textContent = score;
+    if (score >= 840) {
+        scoreTextDisplay.textContent = '您表现非常优秀！';
+    } else if (score >= 525) {
+        scoreTextDisplay.textContent = '您表现良好！';
+    } else {
+        scoreTextDisplay.textContent = '还有很大的提升空间哦！';
+    }
+}
+</script>
+</body>
+</html>
